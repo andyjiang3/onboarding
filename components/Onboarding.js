@@ -15,24 +15,6 @@ const Onboarding = ({pages}) => {
                     </View>  
                 )
             })}
-            {/* <View key="1">
-                <View style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}>
-                <Text>Test 1</Text>
-                </View>
-            </View>
-            <View key="2">
-                <View style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}>
-                <Text>Test 2</Text>
-                </View>
-            </View> */}
         </ViewPager>
     </View>
   );
