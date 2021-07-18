@@ -10,19 +10,19 @@ const OnboardingScreen = (props) => {
        {
          backgroundColor: '#FFAE4E', 
          image: require('../assets/Plan.png'),
-         title: 'Title 1',
-         description: 'Description 1',
+         title: 'Plan',
+         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
        },
        {
         backgroundColor: '#FFBE97', 
         image: require('../assets/Work.png'),
-        title: 'Title 2',
+        title: 'Work',
         description: 'Description 2',
        },
        {
         backgroundColor: '#20B090', 
         image: require('../assets/Done.png'),
-        title: 'Title 3',
+        title: 'Done',
         description: 'Description 3',
        },
       ]} 
