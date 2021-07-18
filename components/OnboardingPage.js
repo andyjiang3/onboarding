@@ -2,13 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, Image,  useWindowDimensions, TouchableOpacity} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 
-const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked, isLast }) => {
+import OnboardingPageNumber from './OnboardingPageNumber'
+
+const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked, isLast, numOfPages, currentPage }) => {
   return (
       <>
     <View style={styles.container(backgroundColor)}>
       <Image source={image} style={styles.pageImage}/>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
+      <OnboardingPageNumber numOfPages={numOfPages} currentPage={currentPage} bgColor={backgroundColor}/>
     </View>
     <View style={styles.bottomNav(backgroundColor, useWindowDimensions().width * 0.26, useWindowDimensions().width * 0.1)}>
         {isLast ? 
@@ -60,6 +63,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingRight: 10,
     paddingLeft: 10,
+    marginBottom: '18%',
   },
   bottomNav: (bgColor, height, padding) => ({
       flexDirection: 'row',

@@ -18,12 +18,9 @@ const Onboarding = ({pages}) => {
             {pages.map((page, index) => {
                 return (
                     <View key={index}>
-                        {pages.length - 1 == index ? 
-                        <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} nextClicked={() => {navigation.navigate('Home');}} isLast={true}/>
-                        : <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} nextClicked={() => {nextPage(index + 1)}} isLast={false}/>
-
-                    }
-                        
+                        <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} 
+                        nextClicked={pages.length - 1 == index ? () => {navigation.navigate('Home');} : () => {nextPage(index + 1)}} 
+                        isLast={pages.length - 1 == index} numOfPages={pages.length} currentPage={index}/>
                     </View>  
                 )
             })}
@@ -31,14 +28,5 @@ const Onboarding = ({pages}) => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default Onboarding;
