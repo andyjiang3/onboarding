@@ -19,8 +19,8 @@ const Onboarding = ({pages}) => {
                 return (
                     <View key={index}>
                         {pages.length - 1 == index ? 
-                        <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} nextClicked={() => {navigation.navigate('Home');}} text="Get Started"/>
-                        : <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} nextClicked={() => {nextPage(index + 1)}} text="Next"/>
+                        <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} nextClicked={() => {navigation.navigate('Home');}} isLast={true}/>
+                        : <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} nextClicked={() => {nextPage(index + 1)}} isLast={false}/>
 
                     }
                         

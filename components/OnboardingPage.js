@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image,  useWindowDimensions, TouchableOpacity} from 'react-native';
+import { AntDesign } from '@expo/vector-icons'; 
 
-const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked, text }) => {
+const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked, isLast }) => {
   return (
       <>
     <View style={styles.container(backgroundColor)}>
@@ -9,15 +10,24 @@ const OnboardingPage = ({ backgroundColor, image, title, description, nextClicke
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>
-    <View style={styles.bottomNav(backgroundColor, useWindowDimensions().width * 0.26, useWindowDimensions().width * 0.12)}>
-        <TouchableOpacity
-            style={styles.button}
-            onPress={nextClicked}
-        >
-        <Text style={styles.next}>
-            {text}
-        </Text>
-        </TouchableOpacity>
+    <View style={styles.bottomNav(backgroundColor, useWindowDimensions().width * 0.26, useWindowDimensions().width * 0.1)}>
+        {isLast ? 
+            <TouchableOpacity
+            style={styles.endButton}
+            onPress={nextClicked}>
+                <Text style={styles.buttonText(true)}>
+                    Get started
+                </Text>
+            </TouchableOpacity> :
+            <TouchableOpacity
+            style={styles.nextButton}
+            onPress={nextClicked}>
+                <Text style={styles.buttonText(false)}>
+                    Next
+                </Text>
+                <AntDesign name="arrowright" size={22} color="white" />
+            </TouchableOpacity>
+        }
     </View>
     </>
   );
@@ -59,14 +69,26 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       paddingHorizontal: padding,
   }),
-  next: {
-    fontSize: 22, 
-    color: 'white', 
-    fontWeight: 'bold' 
-  },
-  button: {
+  buttonText: (isLast) => ({
+    fontSize: isLast ? 20 : 22, 
+    color: isLast ? 'black' : 'white', 
+    fontWeight: 'bold',
+    marginRight: 8, 
+  }),
+  nextButton: {
+    flexDirection: 'row',
     alignItems: 'center', 
     justifyContent: 'center'
+  },
+  endButton: {
+      width: '100%',
+      height: '60%',
+      borderRadius: 30,
+      backgroundColor: 'white',
+      color: '#000',
+      alignItems: 'center', 
+     justifyContent: 'center',
+     marginBottom: '8%',
   }
 });
 
