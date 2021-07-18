@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image,  useWindowDimensions, TouchableOpacity} from 'react-native';
 
-const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked }) => {
+const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked, text }) => {
   return (
       <>
     <View style={styles.container(backgroundColor)}>
@@ -15,7 +15,7 @@ const OnboardingPage = ({ backgroundColor, image, title, description, nextClicke
             onPress={nextClicked}
         >
         <Text style={styles.next}>
-            Next
+            {text}
         </Text>
         </TouchableOpacity>
     </View>
