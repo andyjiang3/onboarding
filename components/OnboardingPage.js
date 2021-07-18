@@ -1,13 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image} from 'react-native';
+import { StyleSheet, Text, View, Image,  useWindowDimensions, TouchableOpacity} from 'react-native';
 
-const OnboardingPage = ({ backgroundColor, image, title, description }) => {
+const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked }) => {
   return (
+      <>
     <View style={styles.container(backgroundColor)}>
       <Image source={image} style={styles.pageImage}/>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>
+    <View style={styles.bottomNav(backgroundColor, useWindowDimensions().width * 0.26, useWindowDimensions().width * 0.12)}>
+        <TouchableOpacity
+            style={styles.button}
+            onPress={nextClicked}
+        >
+        <Text style={styles.next}>
+            Next
+        </Text>
+        </TouchableOpacity>
+    </View>
+    </>
   );
 }
 
@@ -21,8 +33,8 @@ const styles = StyleSheet.create({
     paddingTop: '30%'
   }),
   pageImage: {
-    width: '80%',
-    height: '40%',
+    width: '90%',
+    height: '50%',
     marginBottom: 40,
   },
   title: {
@@ -38,6 +50,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingRight: 10,
     paddingLeft: 10,
+  },
+  bottomNav: (bgColor, height, padding) => ({
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      height: height ? height : 50,
+      backgroundColor: bgColor ? bgColor : '#fff',
+      alignItems: 'center',
+      paddingHorizontal: padding,
+  }),
+  next: {
+    fontSize: 22, 
+    color: 'white', 
+    fontWeight: 'bold' 
+  },
+  button: {
+    alignItems: 'center', 
+    justifyContent: 'center'
   }
 });
 
