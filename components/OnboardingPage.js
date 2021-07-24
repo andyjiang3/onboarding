@@ -4,16 +4,17 @@ import { AntDesign } from '@expo/vector-icons';
 
 import OnboardingPageNumber from './OnboardingPageNumber'
 
-const OnboardingPage = ({ backgroundColor, image, title, description, nextClicked, isLast, numOfPages, currentPage }) => {
+const OnboardingPage = ({ backgroundColor, image, title, description }) => {
+  const { width } = useWindowDimensions()
   return (
       <>
-    <View style={styles.container(backgroundColor)}>
-      <Image source={image} style={styles.pageImage}/>
+    <View style={[styles.container(backgroundColor), { width }]}>
+      <Image source={image} style={[styles.pageImage, {width, resizeMode: 'contain'}]}/>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
-      <OnboardingPageNumber numOfPages={numOfPages} currentPage={currentPage} bgColor={backgroundColor}/>
+      {/* <OnboardingPageNumber numOfPages={numOfPages} currentPage={currentPage} bgColor={backgroundColor}/> */}
     </View>
-    <View style={styles.bottomNav(backgroundColor, useWindowDimensions().width * 0.26, useWindowDimensions().width * 0.1)}>
+    {/* <View style={styles.bottomNav(backgroundColor, useWindowDimensions().width * 0.26, useWindowDimensions().width * 0.1)}>
         {isLast ? 
             <TouchableOpacity
             style={styles.endButton}
@@ -31,7 +32,7 @@ const OnboardingPage = ({ backgroundColor, image, title, description, nextClicke
                 <AntDesign name="arrowright" size={22} color="white" />
             </TouchableOpacity>
         }
-    </View>
+    </View> */}
     </>
   );
 }
@@ -46,24 +47,26 @@ const styles = StyleSheet.create({
     paddingTop: '30%'
   }),
   pageImage: {
-    width: '90%',
-    height: '50%',
-    marginBottom: 40,
+    flex: 0.7,
+    justifyContent: 'center',
   },
   title: {
     color: '#fff',
-    fontSize: 25,
-    fontWeight: "bold",
+    fontSize: 28,
+    fontWeight: '800',
     marginBottom: 15,
+    textAlign: 'center',
+    color: '#493d8a'
   },
   description: {
-    color: '#fff',
+    color: '#62656b',
     fontSize: 18,
     fontWeight: '500',
     textAlign: 'center',
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 20,
+    paddingLeft: 20,
     marginBottom: '18%',
+    textAlign: 'center',
   },
   bottomNav: (bgColor, height, padding) => ({
       flexDirection: 'row',

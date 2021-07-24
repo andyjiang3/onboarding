@@ -8,19 +8,22 @@ const OnboardingScreen = (props) => {
     <Onboarding 
      pages={[
        {
-         backgroundColor: '#FFAE4E', 
+         id: 1,
+         backgroundColor: '#fff', 
          image: require('../assets/Plan2.png'),
          title: 'Plan',
          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
        },
        {
-        backgroundColor: '#FFBE97', 
+        id: 2,
+        backgroundColor: '#fff', 
         image: require('../assets/Work2.png'),
         title: 'Work',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
        },
        {
-        backgroundColor: '#20B090', 
+        id: 3,
+        backgroundColor: '#fff', 
         image: require('../assets/Track.png'),
         title: 'Track',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',

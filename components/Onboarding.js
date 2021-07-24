@@ -1,32 +1,53 @@
-import React, {useRef} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useRef, useState} from 'react';
+import { StyleSheet, Text, View, FlatList, Animated } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import { useNavigation } from '@react-navigation/native';
 
 import OnboardingPage from '../components/OnboardingPage'
 
 const Onboarding = ({pages}) => {
-  const pageIndexRef = useRef(null);
-  const navigation = useNavigation();
-  
-  const nextPage = (pageNum) => {
-      pageIndexRef.current.setPage(pageNum);
-  }
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const slidesRef = useRef(null);
+
+  const viewableItemsChanged = useRef(({viewableItems}) => {
+      setCurrentIndex(viewableItems[0].index);
+  }).current;
+
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 30}).current;
+
   return (
-    <View style={{flex: 1}}>
-        <ViewPager style={{flex: 1}} initialPage={0} ref={pageIndexRef}>
-            {pages.map((page, index) => {
-                return (
-                    <View key={index}>
-                        <OnboardingPage backgroundColor={page.backgroundColor} image={page.image} title={page.title} description={page.description} 
-                        nextClicked={pages.length - 1 == index ? () => {navigation.navigate('Home');} : () => {nextPage(index + 1)}} 
-                        isLast={pages.length - 1 == index} numOfPages={pages.length} currentPage={index}/>
-                    </View>  
-                )
+    <View style={styles.container}>
+        <View style={{alignItems: 'center'}}>
+            <FlatList
+            data={pages}
+            renderItem={({item}) => (
+                <OnboardingPage backgroundColor={item.backgroundColor} image={item.image} title={item.title} description={item.description}/>
+            )}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled
+            keyExtractor={(item) => item.id.toString()}
+            onScroll={Animated.event([{nativeEvent: {contentOffset: { x: scrollX } } }], {
+                useNativeDriver: false,
             })}
-        </ViewPager>
+            onViewableItemsChanged={viewableItemsChanged}
+            viewabilityConfig={viewConfig}
+            ref={slidesRef}
+            />
+        </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+	container: {
+        backgroundColor: 'white',
+		flex: 1,
+		alignItems: 'center',
+	},
+	
+})
+
 
 export default Onboarding;
