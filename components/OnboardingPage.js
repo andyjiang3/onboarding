@@ -1,62 +1,62 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image,  useWindowDimensions, TouchableOpacity} from 'react-native';
-import { AntDesign } from '@expo/vector-icons'; 
+import { useNavigation } from '@react-navigation/native';
 
 import OnboardingPageNumber from './OnboardingPageNumber'
 
-const OnboardingPage = ({ backgroundColor, image, title, description }) => {
+const OnboardingPage = ({ backgroundColor, image, title, description, isLast }) => {
+  const navigation = useNavigation();
+
+  const beginClicked = () => {
+    navigation.navigate('Home');
+  }
+
   const { width } = useWindowDimensions()
   return (
-      <>
+    <>
     <View style={[styles.container(backgroundColor), { width }]}>
-      <Image source={image} style={[styles.pageImage, {width, resizeMode: 'contain'}]}/>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-      {/* <OnboardingPageNumber numOfPages={numOfPages} currentPage={currentPage} bgColor={backgroundColor}/> */}
-    </View>
-    {/* <View style={styles.bottomNav(backgroundColor, useWindowDimensions().width * 0.26, useWindowDimensions().width * 0.1)}>
-        {isLast ? 
+      <View style={{flex: 2}}>
+        <Image source={image} style={[styles.pageImage(isLast), {width, resizeMode: 'contain'}]}/>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+      
+      {isLast &&
+            
             <TouchableOpacity
             style={styles.endButton}
-            onPress={nextClicked}>
+            onPress={beginClicked}>
                 <Text style={styles.buttonText(true)}>
                     Get started
                 </Text>
-            </TouchableOpacity> :
-            <TouchableOpacity
-            style={styles.nextButton}
-            onPress={nextClicked}>
-                <Text style={styles.buttonText(false)}>
-                    Next
-                </Text>
-                <AntDesign name="arrowright" size={22} color="white" />
-            </TouchableOpacity>
+            </TouchableOpacity> 
+          
         }
-    </View> */}
+    </View>
+
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: bgColor => ({
-    flex: 1,
     backgroundColor: bgColor ? bgColor : '#fff',
     alignItems: 'center',
     justifyContent: 'start',
     padding: 10,
-    paddingTop: '30%'
+    paddingTop: '30%',
+    flex: 1,
   }),
-  pageImage: {
-    flex: 0.7,
+  pageImage: (isLast) => ({
+    flex: isLast ? 0.87 : 0.7,
     justifyContent: 'center',
-  },
+  }),
   title: {
-    color: '#fff',
     fontSize: 28,
     fontWeight: '800',
     marginBottom: 15,
     textAlign: 'center',
-    color: '#493d8a'
+    color: '#000'
   },
   description: {
     color: '#62656b',
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   }),
   buttonText: (isLast) => ({
     fontSize: isLast ? 20 : 22, 
-    color: isLast ? 'black' : 'white', 
+    color: 'white', 
     fontWeight: 'bold',
     marginRight: 8, 
   }),
@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   endButton: {
-      width: '100%',
-      height: '60%',
+      width: '95%',
+      height: '10%',
       borderRadius: 30,
-      backgroundColor: 'white',
+      backgroundColor: 'black',
       color: '#000',
       alignItems: 'center', 
      justifyContent: 'center',

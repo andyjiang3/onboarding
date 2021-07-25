@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
       height: 8,
       borderRadius: selected ? '30%' : '50%',
       marginHorizontal: 3,
-      backgroundColor: 'white',
+      backgroundColor: '#000',
     }),
   });
 

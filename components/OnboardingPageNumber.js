@@ -4,10 +4,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import Dot from './Dot'
 
 
-const OnboardingPageNumber = ({numOfPages, currentPage, bgColor}) => {
+const OnboardingPageNumber = ({numOfPages, currentPage}) => {
 
   return (
-    <View style={styles.container(bgColor)}>
+    <View style={styles.container()}>
        {[...Array(numOfPages)].map((_, index) => (
          <Dot key={index} selected={index === currentPage}/>
        ))}
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'start',
     justifyContent: 'center',
-    backgroundColor: bgColor,
+    backgroundColor: '#fff',
   }),
 });
 
